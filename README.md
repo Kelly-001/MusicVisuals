@@ -1,8 +1,8 @@
 # Music Visualiser Project
 
-Name:
+Name: Kelly Luu
 
-Student Number: 
+Student Number: C18310663
 
 ## Instructions
 - Fork this repository and use it a starter project for your assignment
@@ -12,9 +12,9 @@ Student Number:
 - Check out the WaveForm and AudioBandsVisual for examples of how to call the Processing functions from other classes that are not subclasses of PApplet
 
 # Description of the assignment
-
+The assignment is a visual art piece where it responds to the music that's playing
 # Instructions
-
+Run the code and press space
 # How it works
 
 # What I am most proud of in the assignment
