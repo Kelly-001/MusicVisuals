@@ -1,14 +1,14 @@
-package example;
+package c18310663;
 
 import ie.tudublin.Visual;
 
 public class CubeVisual extends Visual
 {
-    boolean twocubes = false;
+    WaveForm wf;
 
     public void settings()
     {
-        size(800, 800, P3D);
+        size(800, 600, P3D);
         println("CWD: " + System.getProperty("user.dir"));
         //fullScreen(P3D, SPAN);
     }
@@ -21,11 +21,6 @@ public class CubeVisual extends Visual
             getAudioPlayer().play();
             
         }
-        if (key == '1')
-        {
-            twocubes = ! twocubes;
-
-        }
     }
 
     public void setup()
@@ -36,9 +31,8 @@ public class CubeVisual extends Visual
         setFrameSize(256);
 
         startMinim();
-        loadAudio("heroplanet.mp3");
-        //getAp().play();
-        //startListening(); 
+        loadAudio("mi.mp3");
+        wf = new WaveForm(this);
         
     }
 
@@ -51,40 +45,50 @@ public class CubeVisual extends Visual
         noFill();
         lights();
         stroke(map(getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
-        camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
+        camera(0, 0, 100, 0, 0, -1, 0, 1, 0);
         translate(0, 0, -250);
-               
-        float boxSize = 50 + (getAmplitude() * 300);//map(average, 0, 1, 100, 400); 
-        smoothedBoxSize = lerp(smoothedBoxSize, boxSize, 0.2f);        
-        if (twocubes)
-        {
-            pushMatrix();
-            translate(-100, 0, 0);
-            rotateY(angle);
-            rotateX(angle);
-            box(smoothedBoxSize);
-            //strokeWeight(1);
-            //sphere(smoothedBoxSize);
-            popMatrix();
-            pushMatrix();
-            translate(100, 0, 0);
-            rotateY(angle);
-            rotateX(angle);
-            strokeWeight(5); 
-            box(smoothedBoxSize);
-            popMatrix();
-        }
-        else
-        {
-            rotateY(angle);
-            rotateX(angle);
-            //strokeWeight(1);
-            //sphere(smoothedBoxSize/ 2);            
-            strokeWeight(5);
-            
-            box(smoothedBoxSize);
-        }
+        
+        rect(-25,-60,50,100);
+        line(-300, -220, -25, -60);
+        line(-300, 220, -25, 40);
+        line(300, -220, 25, -60);
+        line(300, 220, 25, 40);
+
+        float boxSize = 30 + (getSmoothedAmplitude() * 200);
+        smoothedBoxSize = lerp(smoothedBoxSize, boxSize, 0.4f);        
+        pushMatrix();
+        translate(-170, 120, 0);
+        rotateY(angle);
+        rotateX(angle);
+        box(smoothedBoxSize);
+        strokeWeight(3);
+        popMatrix();
+        pushMatrix();
+        translate(170, -120, 0);
+        rotateY(angle);
+        rotateX(angle);
+        strokeWeight(3); 
+        box(smoothedBoxSize);
+        popMatrix();
+        pushMatrix();
+        translate(-170, -120, 0);
+        rotateY(angle1);
+        rotateX(angle1);
+        strokeWeight(3); 
+        box(smoothedBoxSize);
+        popMatrix();
+        pushMatrix();
+        translate(170, 120, 0);
+        rotateY(angle1);
+        rotateX(angle1);
+        strokeWeight(3); 
+        box(smoothedBoxSize);
+        popMatrix();
         angle += 0.01f;
+        angle1 -= 0.01f;
+
+        wf.render();
     }
     float angle = 0;
+    float angle1 = 0;
 } 

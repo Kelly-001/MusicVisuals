@@ -1,4 +1,4 @@
-package example;
+package c18310663;
 
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
@@ -8,7 +8,7 @@ public class RotatingAudioBands extends Visual {
 
     public void settings()
     {
-        size(800, 800, P3D);
+        size(600, 800, P3D);
         println("CWD: " + System.getProperty("user.dir"));
         //fullScreen(P3D, SPAN);
     }
@@ -32,7 +32,7 @@ public class RotatingAudioBands extends Visual {
         setFrameSize(256);
 
         startMinim();
-        loadAudio("heroplanet.mp3");
+        loadAudio("mi.mp3");
         getAudioPlayer().play();
         //startListening(); 
         

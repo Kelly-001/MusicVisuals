@@ -1,31 +1,31 @@
-package example;
+package c18310663;
 
 import processing.core.*;
 
-// This is an example of a visual that renders the waveform
 public class WaveForm
 {
-    MyVisual mv;
+    CubeVisual cv;
     float cy = 0;
 
-    public WaveForm(MyVisual mv)
+    public WaveForm(CubeVisual cv)
     {
-        this.mv = mv;
-        cy = this.mv.height / 2;
+        this.cv = cv;
+        cy = this.cv.width / 2;
     }
 
     public void render()
     {
-        mv.colorMode(PApplet.HSB);
-        for(int i = 0 ; i < mv.getAudioBuffer().size() ; i ++)
+        float sz;
+        cv.colorMode(PApplet.HSB);
+        for(int i = 0 ; i < 50; i ++)
         {
-            mv.stroke(
-                PApplet.map(i, 0, mv.getAudioBuffer().size(), 0, 255)
+            cv.stroke(
+                PApplet.map(i, 0, 50, 0, 255)
                 , 255
                 , 255
             );
-
-            mv.line(i, cy, i, cy + cy * mv.getAudioBuffer().get(i));
+            sz = PApplet.map(i,0,50,0,cv.getAudioBuffer().size());
+            cv.line(-25 + i , 0, -25 + i,  30 * cv.getAudioBuffer().get(i));
         }
     }
 }
