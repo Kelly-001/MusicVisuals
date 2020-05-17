@@ -27,10 +27,10 @@ public class MyVisual extends Visual
 
         
         // Call this instead to read audio from the microphone
-        loadAudio("mi.mp3");
+        loadAudio("bts.mp3");
         getAudioPlayer().play(); 
         
-        wf = new WaveForm(this);
+     
         abv = new AudioBandsVisual(this);
     }
 

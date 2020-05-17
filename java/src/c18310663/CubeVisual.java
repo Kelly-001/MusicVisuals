@@ -5,7 +5,9 @@ import ie.tudublin.Visual;
 public class CubeVisual extends Visual
 {
     WaveForm wf;
-
+    boolean move = false;
+    boolean turn = false;
+    boolean cam = false;
     public void settings()
     {
         size(800, 600, P3D);
@@ -20,6 +22,15 @@ public class CubeVisual extends Visual
             getAudioPlayer().cue(0);
             getAudioPlayer().play();
             
+        }
+        if( key == '1'){
+            move = ! move;
+        }
+        if( key == '2'){
+            turn = ! turn;
+        }
+        if( key == '3'){
+            cam = ! cam;
         }
     }
 
@@ -45,7 +56,7 @@ public class CubeVisual extends Visual
         noFill();
         lights();
         stroke(map(getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
-        camera(0, 0, 100, 0, 0, -1, 0, 1, 0);
+        camera(0, 0, loc, 0, 0, -1, 0, 1, 0);
         translate(0, 0, -250);
         
         rect(-25,-60,50,100);
@@ -54,41 +65,72 @@ public class CubeVisual extends Visual
         line(300, -220, 25, -60);
         line(300, 220, 25, 40);
 
-        float boxSize = 30 + (getSmoothedAmplitude() * 200);
-        smoothedBoxSize = lerp(smoothedBoxSize, boxSize, 0.4f);        
+        float boxSize = cubes + (getSmoothedAmplitude() * 200);
+        smoothedBoxSize = lerp(smoothedBoxSize, boxSize, 0.8f);        
         pushMatrix();
-        translate(-170, 120, 0);
-        rotateY(angle);
+        translate(aa, 120, cube);
         rotateX(angle);
+        rotateY(angle);
         box(smoothedBoxSize);
         strokeWeight(3);
         popMatrix();
         pushMatrix();
-        translate(170, -120, 0);
-        rotateY(angle);
+        translate(cc, -120, cube);
+        strokeWeight(3);
         rotateX(angle);
-        strokeWeight(3); 
+        rotateY(angle); 
         box(smoothedBoxSize);
         popMatrix();
         pushMatrix();
-        translate(-170, -120, 0);
-        rotateY(angle1);
+        translate(aa, -120, cube);
+        strokeWeight(3);
         rotateX(angle1);
-        strokeWeight(3); 
+        rotateY(angle1); 
         box(smoothedBoxSize);
         popMatrix();
         pushMatrix();
-        translate(170, 120, 0);
-        rotateY(angle1);
-        rotateX(angle1);
+        translate(cc, 120, cube);
         strokeWeight(3); 
+        rotateX(angle1);
+        rotateY(angle1);
         box(smoothedBoxSize);
         popMatrix();
-        angle += 0.01f;
-        angle1 -= 0.01f;
+       
 
+        if(move){
+            turn = false;
+            cube -= 5;
+            cubes += 1;
+            if(cube < -400)
+            {
+                cube = 200;
+                cubes = 0;
+            }
+        }
+
+        if(turn){
+            angle += 0.02f;
+            angle1 -= 0.02f;
+            aa += 1;
+            cc -= 1;
+            if(aa == 170){
+                aa = -170;
+                cc = 170;
+            }
+        }
+
+        if(cam){
+            if(loc != -500){
+                loc -= 1;
+            }
+        }
         wf.render();
     }
+    float cube = 200;
     float angle = 0;
     float angle1 = 0;
+    float cubes = 0;
+    float loc = -315;
+    float aa = -150;
+    float cc = 150;
 } 
