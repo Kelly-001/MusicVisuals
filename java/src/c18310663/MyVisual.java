@@ -2,7 +2,7 @@ package c18310663;
 
 import ie.tudublin.Visual;
 
-public class CubeVisual extends Visual
+public class MyVisual extends Visual
 {
     WaveForm wf;
     boolean moveup = false;

@@ -4,10 +4,10 @@ import processing.core.*;
 
 public class WaveForm
 {
-    CubeVisual cv;
+    MyVisual cv;
     float cy = 0;
 
-    public WaveForm(CubeVisual cv)
+    public WaveForm(MyVisual cv)
     {
         this.cv = cv;
         cy = this.cv.width / 2;
