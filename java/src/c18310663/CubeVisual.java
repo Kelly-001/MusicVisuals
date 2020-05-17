@@ -5,9 +5,11 @@ import ie.tudublin.Visual;
 public class CubeVisual extends Visual
 {
     WaveForm wf;
-    boolean move = false;
+    boolean moveup = false;
+    boolean movedown = false;
     boolean turn = false;
-    boolean cam = false;
+    boolean camout = false;
+    boolean camin = false;
     public void settings()
     {
         size(800, 600, P3D);
@@ -24,13 +26,16 @@ public class CubeVisual extends Visual
             
         }
         if( key == '1'){
-            move = ! move;
+            moveup = ! moveup;
         }
         if( key == '2'){
             turn = ! turn;
         }
         if( key == '3'){
-            cam = ! cam;
+            camout = ! camout;
+        }
+        if( key =='4'){
+            camin = ! camin;
         }
     }
 
@@ -97,14 +102,22 @@ public class CubeVisual extends Visual
         popMatrix();
        
 
-        if(move){
-            turn = false;
-            cube -= 5;
-            cubes += 1;
-            if(cube < -400)
+        if(moveup){
+            movedown = false;
+            cube -= 2;
+            cubes += .5;
+            if(cube < -400) 
             {
-                cube = 200;
-                cubes = 0;
+                movedown = true;
+            }
+        }
+
+        if(movedown){
+            moveup = false;
+            cube += 2;
+            cubes -= .5;
+            if(cube > 200){
+                moveup = true;
             }
         }
 
@@ -119,9 +132,16 @@ public class CubeVisual extends Visual
             }
         }
 
-        if(cam){
-            if(loc != -500){
-                loc -= 1;
+        if(camout){
+            if(loc > -500){
+                loc -= .2;
+            }
+        }
+        if(camin){
+            cube = 200;
+            cubes = 0;
+            if(loc < -315){
+                loc += .2;
             }
         }
         wf.render();
